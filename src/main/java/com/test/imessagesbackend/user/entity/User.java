@@ -24,8 +24,8 @@ public class User extends BaseEntity {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
-    private String userId;
+    @Column(name = "email", nullable = false)
+    private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -46,8 +46,7 @@ public class User extends BaseEntity {
     private List<Room> createdRooms = new ArrayList<>();
 
     @Builder
-    public User(String userId, String password, String profileImgUrl) {
-        this.userId = userId;
+    public User(String password, String profileImgUrl) {
         this.password = password;
         this.profileImgUrl = profileImgUrl;
     }
