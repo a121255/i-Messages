@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,10 +29,6 @@ public class RoomService {
                 .map(room -> RoomResponse.builder()
                         .id(room.getId())
                         .name(room.getName())
-                        .creator(room.getCreator().getUserId())
-                        .roomUsers(room.getRoomUsers().stream()
-                                .map(roomUser -> roomUser.getUser().getId())
-                                .collect(Collectors.toList()))
                         .build())
                 .toList();
     }
@@ -42,15 +36,10 @@ public class RoomService {
     public RoomResponse findRoomByUserIdAndRoomId(Long userId, Long roomId) {
         return roomRepository.findByUserIdAndRoomId(userId, roomId)
                 .map(room -> {
-                    List<Long> roomUserIds = room.getRoomUsers().stream()
-                            .map(roomUser -> roomUser.getUser().getId())
-                            .collect(Collectors.toList());
 
                     return RoomResponse.builder()
                             .id(room.getId())
                             .name(room.getName())
-                            .creator(room.getCreator().getUserId())
-                            .roomUsers(roomUserIds)
                             .build();
                 })
                 .orElseThrow(() -> new RoomNotFoundException(roomId, "채팅방을 찾을 수 없습니다"));
@@ -69,15 +58,9 @@ public class RoomService {
         RoomUser roomUser = new RoomUser(savedRoom, creator, LocalDateTime.now());
         roomUserRepository.save(roomUser);
 
-        List<Long> roomUserIds = savedRoom.getRoomUsers().stream()
-                .map(user -> user.getUser().getId())
-                .collect(Collectors.toList());
-
         return RoomResponse.builder()
                 .id(savedRoom.getId())
                 .name(savedRoom.getName())
-                .creator(savedRoom.getCreator().getUserId())
-                .roomUsers(roomUserIds)
                 .build();
     }
 

@@ -2,6 +2,7 @@ package com.test.imessagesbackend.room.dto;
 
 import com.test.imessagesbackend.room.entity.Room;
 import com.test.imessagesbackend.user.entity.User;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,16 +11,15 @@ import java.util.stream.Collectors;
 
 @Getter
 public class RoomResponse {
+    @Schema(description = "채팅방 ID")
     private final Long id;
+
+    @Schema(description = "채팅방 이름")
     private final String name;
-    private final String creator;
-    private final List<Long> roomUsers;
 
     @Builder
-    public RoomResponse(Long id, String name, String creator, List<Long> roomUsers) {
+    public RoomResponse(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.creator = creator;
-        this.roomUsers = roomUsers;
     }
 }
