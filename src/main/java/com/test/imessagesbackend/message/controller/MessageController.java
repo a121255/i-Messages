@@ -24,7 +24,6 @@ public class MessageController {
     @Operation(summary = "특정 채팅방의 메시지 조회", description = "사용자가 속한 채팅방의 메시지를 조회합니다.")
     @GetMapping("/rooms/{roomId}/messages")
     public ApiResponse<List<MessageResponse>> getMessages(@Parameter(description = "조회할 roomId") @PathVariable Long roomId) {
-        Long userId = 1L;   // 로그인 구현 전까지 하드코딩
         return ApiResponse.success(messageService.findMessageByRoomId(roomId));
     }
 }

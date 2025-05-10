@@ -1,7 +1,7 @@
 package com.test.imessagesbackend.message.service;
 
 import com.test.imessagesbackend.common.error.exception.RoomNotFoundException;
-import com.test.imessagesbackend.common.error.exception.UserNotFountException;
+import com.test.imessagesbackend.common.error.exception.UserNotFoundException;
 import com.test.imessagesbackend.message.dto.MessageRequest;
 import com.test.imessagesbackend.message.dto.MessageResponse;
 import com.test.imessagesbackend.message.entity.Message;
@@ -41,7 +41,7 @@ public class MessageService {
     public void saveMessage(MessageRequest messageRequest) {
         Long userId = 1L;
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFountException(userId));
+                .orElseThrow(() -> new UserNotFoundException(userId));
         Room room = roomRepository.findById(messageRequest.getRoomId())
                 .orElseThrow(() -> new RoomNotFoundException(messageRequest.getRoomId()));
 
