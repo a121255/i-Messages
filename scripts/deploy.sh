@@ -3,7 +3,7 @@
 REPOSITORY=/home/ubuntu/i-Messages
 cd $REPOSITORY
 
-APP_NAME=moduform
+APP_NAME=i-Messages
 JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep 'SNAPSHOT.jar' | tail -n 1)
 JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
