@@ -33,8 +33,12 @@ jobs:
           JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
         run: ./gradlew clean build
 
-      - name: Make Zip File
-        run: zip -qq -r ./$GITHUB_SHA.zip .
+      - name: Make Deploy Directory
+        run: |
+          mkdir deploy
+          cp -r build scripts appspec.yml deploy/
+          cd deploy
+          zip -r ../$GITHUB_SHA.zip .
         shell: bash
 
       - name: Configure AWS credentials
