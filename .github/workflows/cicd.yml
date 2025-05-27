@@ -33,6 +33,9 @@ jobs:
           JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
         run: ./gradlew clean build
 
+      - name: Give execute permission to deploy script
+        run: chmod +x scripts/deploy.sh
+
       - name: Make Deploy Directory
         run: |
           mkdir deploy
@@ -57,3 +60,4 @@ jobs:
                 --deployment-config-name CodeDeployDefault.AllAtOnce
                 --deployment-group-name $DEPLOYMENT_GROUP_NAME
                 --s3-location bucket=$BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+
