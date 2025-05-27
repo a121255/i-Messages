@@ -12,7 +12,7 @@ CURRENT_PID=$(pgrep -f $APP_NAME)
 
 if [ -z $CURRENT_PID ]
 then
-  echo "> 종료할 애플리케이션이 없습니다."
+  echo "> No running application found to stop."
 else
   echo "> kill -9 $CURRENT_PID"
   kill -15 $CURRENT_PID
