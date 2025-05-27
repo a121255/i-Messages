@@ -3,8 +3,8 @@
 REPOSITORY=/home/ubuntu/i-Messages
 cd $REPOSITORY
 
-APP_NAME=i-Messages
-JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep 'SNAPSHOT.jar' | tail -n 1)
+APP_NAME=i-Messages-Backend
+JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep 'i-Messages-Backend.*\.jar' | tail -n 1)
 JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
 CURRENT_PID=$(pgrep -f $APP_NAME)
@@ -19,4 +19,4 @@ else
 fi
 
 echo "> Deploy - $JAR_PATH "
-nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
+nohup java -jar $JAR_PATH > $REPOSITORY/nohup.out 2>&1 &
