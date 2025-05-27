@@ -50,6 +50,7 @@ public class TokenApiControllerTest {
     @BeforeEach
     public void mockMvcSetup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+        refreshTokenRepository.deleteAll();
         userRepository.deleteAll();
     }
 
@@ -57,7 +58,7 @@ public class TokenApiControllerTest {
     @Test
     public void createNewAccessToken() throws Exception {
         // given
-        final String url = "/api/token";
+        final String url = "/api/auth/token";
 
         User testUser = userRepository.save(User.builder()
                 .email("user@dkd.com")

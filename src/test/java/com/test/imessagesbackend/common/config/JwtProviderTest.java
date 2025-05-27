@@ -63,7 +63,7 @@ public class JwtProviderTest {
         boolean result = tokenProvider.validToken(token);
 
         // then
-        assertThat(result).isTrue();
+        assertThat(result).isFalse();
     }
 
     @DisplayName("validToken(): 유효한 토큰인 때 유효성 검증에 성공한다.")
