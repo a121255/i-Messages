@@ -20,4 +20,4 @@ else
 fi
 
 echo "> Deploy - $JAR_PATH "
-nohup java -jar $JAR_PATH > $REPOSITORY/nohup.out 2>&1 &
+nohup java -jar $JAR_PATH --spring.config.location=$CONFIG_PATH > $REPOSITORY/nohup.out 2>&1 &
